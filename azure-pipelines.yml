@@ -1,15 +1,23 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+jobs:
+- job: 'Test'
+  pool:
+    vmImage: 'Ubuntu-18.04' # other options: 'macOS-10.13', 'VS2017-Win2016'
+  strategy:
+    matrix:
+      Python27:
+        python.version: '2.7'
+      Python35:
+        python.version: '3.7'
+      Python36:
+        python.version: '3.6'
+    maxParallel: 3
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: 'x64'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    tox
-  displayName: 'Run tox'
+  - script: 'tox'
+    displayName: 'Tox'
