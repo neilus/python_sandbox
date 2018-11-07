@@ -1,9 +1,51 @@
 # https://aka.ms/yaml
 jobs:
-- job: 'Test'
+- job: 'Test on Xenial'
   pool:
     vmImage: 'Ubuntu-16.04' # other options: 'macOS-10.13', 'VS2017-Win2016'
+
+  steps:
+  - script: 'python -m pip install --upgrade pip tox'
+    displayName: 'Install TOX'
+
+  - script: 'tox --skip-missing-interpreters'
+    displayName: 'Tox'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit
+      testResultsFiles: '**/junit-*.xml'
+      #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+      #mergeTestResults: false # Optional
+      #testRunTitle: # Optional
+      #buildPlatform: # Optional
+      #buildConfiguration: # Optional
+      #publishRunAttachments: true # Optional
+
+- job: 'Test on macOS'
+  pool:
     vmImage: 'macOS-10.13'
+
+  steps:
+  - script: 'python -m pip install --upgrade pip tox'
+    displayName: 'Install TOX'
+
+  - script: 'tox --skip-missing-interpreters'
+    displayName: 'Tox'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit
+      testResultsFiles: '**/junit-*.xml'
+      #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+      #mergeTestResults: false # Optional
+      #testRunTitle: # Optional
+      #buildPlatform: # Optional
+      #buildConfiguration: # Optional
+      #publishRunAttachments: true # Optional
+
+- job: 'Test on Windows'
+  pool:
     vmImage: 'VS2017-Win2016'
 
   steps:
