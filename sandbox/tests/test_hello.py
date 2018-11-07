@@ -1,5 +1,5 @@
 import unittest
-from hello import Hello
+from sandbox.hello import Hello
 
 
 class MyTestCase(unittest.TestCase):
