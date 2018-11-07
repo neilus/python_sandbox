@@ -5,7 +5,7 @@ jobs:
     vmImage: 'Ubuntu-16.04' # other options: 'macOS-10.13', 'VS2017-Win2016'
 
   steps:
-  - script: 'pip install --upgrade pip tox'
+  - script: 'sudo pip install --upgrade pip tox'
     displayName: 'Install TOX'
 
   - script: 'tox --skip-missing-interpreters'
