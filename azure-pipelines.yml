@@ -1,6 +1,6 @@
 # https://aka.ms/yaml
 jobs:
-- job: 'Test on Xenial'
+- job: 'tox_on_Xenial'
   pool:
     vmImage: 'Ubuntu-16.04' # other options: 'macOS-10.13', 'VS2017-Win2016'
 
@@ -22,7 +22,7 @@ jobs:
       #buildConfiguration: # Optional
       #publishRunAttachments: true # Optional
 
-- job: 'Test on macOS'
+- job: 'tox_on_macOS'
   pool:
     vmImage: 'macOS-10.13'
 
@@ -44,7 +44,7 @@ jobs:
       #buildConfiguration: # Optional
       #publishRunAttachments: true # Optional
 
-- job: 'Test on Windows'
+- job: 'tox_on_Windows'
   pool:
     vmImage: 'VS2017-Win2016'
 
